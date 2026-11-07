@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#17191e">
+<title>PROJECT PULSE — GOD EDITION</title>
+<style>
+:root{
+ --bg:#17191e;--panel:#20232a;--panel2:#272b33;--line:#363b45;
+ --text:#f1f2f4;--muted:#a4a9b3;--red:#741f2b;--red2:#963342;
+ --blue:#24558a;--blue2:#3475b7;--good:#4d9a78;--shadow:0 18px 50px #0005;
+ --radius:18px
+}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+button,input,textarea,select{font:inherit}button{cursor:pointer}
+.app{min-height:100vh;display:grid;grid-template-columns:255px 1fr}
+.sidebar{background:#1c1f25;border-right:1px solid var(--line);padding:22px 16px;display:flex;flex-direction:column;gap:22px;position:sticky;top:0;height:100vh}
+.brand{display:flex;align-items:center;gap:12px;padding:4px 8px}
+.logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(140deg,var(--red),#333b4b 65%,var(--blue));display:grid;place-items:center;font-weight:900;font-size:20px;box-shadow:0 7px 24px #741f2b55}
+.brand strong{display:block;letter-spacing:1.5px;font-size:15px}.brand small{color:var(--muted);font-size:11px;letter-spacing:2px}
+.nav-label{color:#777f8c;font-size:10px;font-weight:800;letter-spacing:1.5px;padding:0 11px;margin-bottom:7px}
+.nav{display:grid;gap:5px}.nav button{border:0;background:transparent;color:#b8bdc6;text-align:left;padding:11px 12px;border-radius:12px;display:flex;align-items:center;gap:12px;transition:.2s}
+.nav button:hover{background:#ffffff0b;color:white}.nav button.active{background:linear-gradient(90deg,#741f2b44,#24558a22);color:white;box-shadow:inset 3px 0 var(--red2)}
+.nav .ico{width:21px;text-align:center;font-size:17px}.side-bottom{margin-top:auto}.local-note{padding:13px;border:1px solid var(--line);border-radius:14px;color:var(--muted);font-size:11px;background:#ffffff04}
+main{min-width:0}.topbar{height:76px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 30px;background:#17191eea;position:sticky;top:0;z-index:5;backdrop-filter:blur(14px)}
+.top-left{display:flex;align-items:center;gap:12px}.menu-btn{display:none}.eyebrow{font-size:10px;letter-spacing:1.8px;color:var(--muted);font-weight:800}.top-title{font-size:17px;font-weight:750}
+.top-actions{display:flex;align-items:center;gap:10px}.date-pill,.profile{border:1px solid var(--line);background:var(--panel);padding:8px 12px;border-radius:12px;color:var(--muted);font-size:12px}.profile{display:flex;align-items:center;gap:9px;color:var(--text)}.avatar{width:27px;height:27px;border-radius:9px;background:var(--blue);display:grid;place-items:center;font-weight:800}
+.content{max-width:1400px;margin:auto;padding:30px}.page{display:none;animation:fade .25s ease}.page.active{display:block}@keyframes fade{from{opacity:.3;transform:translateY(5px)}to{opacity:1;transform:none}}
+.page-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:24px}.page-head h1{font-size:clamp(25px,3vw,34px);margin:4px 0 5px;letter-spacing:-1px}.page-head p{margin:0;color:var(--muted)}
+.btn{border:1px solid transparent;border-radius:12px;padding:10px 15px;font-weight:700;color:white;background:var(--blue);transition:.2s}.btn:hover{filter:brightness(1.15);transform:translateY(-1px)}.btn.red{background:var(--red)}.btn.ghost{background:var(--panel);border-color:var(--line);color:var(--text)}.btn.small{padding:7px 10px;font-size:12px}
+.grid{display:grid;gap:16px}.stats{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:18px}.card{background:linear-gradient(145deg,#252932,#20232a);border:1px solid var(--line);border-radius:var(--radius);padding:19px;box-shadow:0 8px 25px #00012;min-width:0}
+.stat-top{display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:12px}.stat-icon{width:34px;height:34px;border-radius:11px;background:#24558a33;display:grid;place-items:center;font-size:16px}.stat-number{font-size:29px;font-weight:800;margin:12px 0 1px;letter-spacing:-1px}.stat-foot{font-size:11px;color:var(--muted)}
+.two-col{grid-template-columns:1.25fr .75fr}.three-col{grid-template-columns:repeat(3,minmax(0,1fr))}
+.card-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.card-title h3{font-size:15px;margin:0}.muted{color:var(--muted)}.small-text{font-size:12px;color:var(--muted)}
+.progress{height:8px;background:#111319;border-radius:99px;overflow:hidden;margin:10px 0}.progress span{height:100%;display:block;background:linear-gradient(90deg,var(--red),var(--blue2));border-radius:99px}
+.quick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.quick{background:#ffffff05;border:1px solid var(--line);border-radius:14px;padding:15px;text-align:left;color:var(--text)}.quick:hover{border-color:var(--blue2);background:#24558a16}.quick b{display:block;margin-top:8px;font-size:12px}.quick span{font-size:20px}
+.list{display:grid;gap:9px}.list-row{display:flex;align-items:center;gap:11px;padding:11px;border:1px solid #ffffff0b;background:#ffffff04;border-radius:12px;min-width:0}.list-row .grow{flex:1;min-width:0}.list-row strong{font-size:13px;display:block;overflow-wrap:anywhere}.list-row small{color:var(--muted);font-size:11px}.check{width:19px;height:19px;accent-color:var(--blue);flex:none}.tag{font-size:10px;border-radius:99px;padding:4px 8px;background:#24558a33;color:#9cc8f4;white-space:nowrap}.tag.red{background:#741f2b44;color:#e8a1aa}.empty{padding:25px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:14px;font-size:13px}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}.field{background:#171a20;border:1px solid var(--line);border-radius:11px;padding:10px 12px;color:var(--text);outline:none;min-width:0;width:100%}.field:focus{border-color:var(--blue2);box-shadow:0 0 0 3px #24558a2a}.toolbar .field{max-width:280px}
+.item-actions{display:flex;gap:6px}.icon-btn{border:1px solid var(--line);background:#ffffff06;color:var(--muted);border-radius:9px;padding:6px 9px}.icon-btn:hover{color:white;border-color:var(--red2)}
+.project-card{display:flex;flex-direction:column;gap:12px}.project-card h3{margin:0;font-size:16px}.project-card p{margin:0;color:var(--muted);font-size:12px;min-height:36px}.project-meta{display:flex;justify-content:space-between;color:var(--muted);font-size:11px}
+.subject{border-left:3px solid var(--blue);padding:12px 14px;background:#ffffff05;border-radius:0 12px 12px 0}.subject h3{margin:0 0 3px;font-size:14px}.subject p{margin:0;color:var(--muted);font-size:12px}
+.settings-grid{grid-template-columns:1fr 1fr}.setting-row{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:13px 0;border-bottom:1px solid var(--line)}.setting-row:last-child{border:0}.setting-row strong{font-size:13px;display:block}.setting-row small{font-size:11px;color:var(--muted)}
+.swatches{display:flex;gap:8px}.swatch{width:28px;height:28px;border-radius:9px;border:2px solid #ffffff44}
+.chat-shell{max-width:900px;margin:auto;display:grid;grid-template-rows:auto minmax(260px,1fr) auto;gap:12px}.chat-status{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12px}.status-dot{width:8px;height:8px;border-radius:50%;background:#b18a48;box-shadow:0 0 0 4px #b18a4820}.status-dot.online{background:var(--good);box-shadow:0 0 0 4px #4d9a7820}.chat-log{min-height:300px;max-height:52vh;overflow:auto;display:flex;flex-direction:column;gap:12px;padding:16px;background:#171a20;border:1px solid var(--line);border-radius:15px}.chat-msg{max-width:min(82%,680px);padding:12px 14px;border:1px solid var(--line);border-radius:14px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px}.chat-msg.user{align-self:flex-end;background:#24558a35;border-color:#24558a77}.chat-msg.assistant{align-self:flex-start;background:#ffffff08}.chat-msg.error{border-color:#963342;color:#f0b5bc}.chat-compose{display:grid;grid-template-columns:1fr auto;gap:9px}.chat-compose textarea{resize:vertical;min-height:52px;max-height:150px}.chat-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.notice{border:1px solid #24558a66;background:#24558a18;border-radius:14px;padding:14px;color:#b8d7f5;font-size:12px}
+.modal-backdrop{position:fixed;inset:0;background:#0009;display:none;align-items:center;justify-content:center;padding:18px;z-index:20}.modal-backdrop.show{display:flex}.modal{width:min(470px,100%);background:#22262e;border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:var(--shadow)}.modal h2{margin:0 0 15px;font-size:19px}.form-grid{display:grid;gap:12px}.form-grid label{display:grid;gap:6px;color:var(--muted);font-size:12px}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:17px}
+.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#292e37;border:1px solid var(--line);padding:11px 16px;border-radius:12px;z-index:30;transition:.25s;box-shadow:var(--shadow);font-size:13px}.toast.show{opacity:1;transform:translate(-50%,0)}
+.mobile-nav{display:none}
+@media(max-width:1000px){.stats{grid-template-columns:repeat(2,1fr)}.two-col{grid-template-columns:1fr}.three-col{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){
+ .chat-log{max-height:48vh;padding:11px}.chat-msg{max-width:92%}.chat-compose{grid-template-columns:1fr}.chat-compose .btn{width:100%}
+ .app{display:block}.sidebar{position:fixed;z-index:15;left:-280px;top:0;width:260px;transition:.25s;box-shadow:var(--shadow)}.sidebar.open{left:0}.menu-btn{display:inline-grid;place-items:center;background:var(--panel);border:1px solid var(--line);color:white;width:38px;height:38px;border-radius:11px}
+ .topbar{height:66px;padding:0 15px}.date-pill{display:none}.content{padding:21px 15px 95px}.page-head{align-items:flex-start;flex-direction:column}.page-head .btn{width:100%}
+ .stats{gap:10px}.card{padding:15px}.stat-number{font-size:25px}.three-col,.settings-grid{grid-template-columns:1fr}.quick-grid{grid-template-columns:repeat(3,1fr)}.quick{padding:11px}.profile span:last-child{display:none}
+ .mobile-nav{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;bottom:0;left:0;right:0;background:#1d2027f5;border-top:1px solid var(--line);padding:8px 5px calc(8px + env(safe-area-inset-bottom));z-index:10;backdrop-filter:blur(16px)}
+ .mobile-nav button{border:0;background:transparent;color:var(--muted);font-size:10px;display:grid;justify-items:center;gap:3px;padding:4px 0}.mobile-nav button span{font-size:18px}.mobile-nav button.active{color:#fff}
+}
+@media(max-width:390px){.stats{grid-template-columns:1fr 1fr}.quick-grid{grid-template-columns:1fr 1fr}.quick:last-child{grid-column:span 2}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar" id="sidebar">
+ <div class="brand"><div class="logo">P</div><div><strong>PROJECT PULSE</strong><small>GOD EDITION · 1.0</small></div></div>
+ <div><div class="nav-label">WORKSPACE</div><nav class="nav" id="sideNav">
+  <button class="active" data-page="dashboard"><span class="ico">◫</span>Visão geral</button>
+  <button data-page="tasks"><span class="ico">✓</span>Tarefas</button>
+  <button data-page="projects"><span class="ico">▦</span>Projetos</button>
+  <button data-page="study"><span class="ico">▤</span>Estudos</button>
+ </nav></div>
+ <div><div class="nav-label">SISTEMA</div><nav class="nav">
+  <button data-page="assistant"><span class="ico">✧</span>Pulse AI</button>
+  <button data-page="settings"><span class="ico">⚙</span>Configurações</button>
+ </nav></div>
+ <div class="side-bottom"><div class="local-note">◉ <b>Modo local ativo</b><br>Seus dados ficam salvos neste navegador.</div></div>
+</aside>
+<main>
+ <header class="topbar"><div class="top-left"><button class="menu-btn" id="menuBtn" aria-label="Abrir menu">☰</button><div><div class="eyebrow">PERSONAL WORKSPACE</div><div class="top-title" id="topTitle">Visão geral</div></div></div><div class="top-actions"><div class="date-pill" id="today"></div><div class="profile"><div class="avatar">G</div><span>Meu espaço</span></div></div></header>
+ <div class="content">
+  <section class="page active" id="page-dashboard">
+   <div class="page-head"><div><div class="eyebrow">SEU CENTRO DE COMANDO</div><h1>Vamos fazer acontecer.</h1><p>Acompanhe suas tarefas, projetos e evolução em um só lugar.</p></div><button class="btn red" data-open="task">＋ Nova tarefa</button></div>
+   <div class="grid stats">
+    <div class="card"><div class="stat-top">Tarefas pendentes <span class="stat-icon">✓</span></div><div class="stat-number" id="statPending">0</div><div class="stat-foot">Itens que ainda precisam da sua atenção</div></div>
+    <div class="card"><div class="stat-top">Concluídas <span class="stat-icon">◆</span></div><div class="stat-number" id="statDone">0</div><div class="stat-foot">Tarefas finalizadas</div></div>
+    <div class="card"><div class="stat-top">Projetos ativos <span class="stat-icon">▦</span></div><div class="stat-number" id="statProjects">0</div><div class="stat-foot">Projetos em andamento</div></div>
+    <div class="card"><div class="stat-top">Sessões de estudo <span class="stat-icon">▤</span></div><div class="stat-number" id="statStudy">0</div><div class="stat-foot">Sessões registradas</div></div>
+   </div>
+   <div class="grid two-col">
+    <div class="card"><div class="card-title"><h3>Foco de hoje</h3><span class="tag" id="todayProgress">0% concluído</span></div><div class="stat-number" id="focusCount">0/0</div><div class="small-text">Tarefas concluídas hoje</div><div class="progress"><span id="focusBar" style="width:0%"></span></div><div class="list" id="todayTasks"></div></div>
+    <div class="card"><div class="card-title"><h3>Acesso rápido</h3><span class="small-text">Atalhos</span></div><div class="quick-grid">
+     <button class="quick" data-open="task"><span>＋</span><b>Nova tarefa</b></button>
+     <button class="quick" data-open="project"><span>▦</span><b>Novo projeto</b></button>
+     <button class="quick" data-page="study"><span>▤</span><b>Estudar</b></button>
+     <button class="quick" data-page="assistant"><span>✧</span><b>Pulse AI</b></button>
+     <button class="quick" data-page="projects"><span>◈</span><b>Projetos</b></button>
+     <button class="quick" data-page="settings"><span>⚙</span><b>Ajustes</b></button>
+    </div></div>
+   </div>
+   <div class="card" style="margin-top:16px"><div class="card-title"><h3>Projetos em andamento</h3><button class="btn ghost small" data-page="projects">Ver todos</button></div><div class="grid three-col" id="dashboardProjects"></div></div>
+  </section>
+
+  <section class="page" id="page-tasks">
+   <div class="page-head"><div><div class="eyebrow">ORGANIZAÇÃO</div><h1>Minhas tarefas</h1><p>Transforme planos em pequenas ações.</p></div><button class="btn red" data-open="task">＋ Adicionar tarefa</button></div>
+   <div class="toolbar"><input class="field" id="taskSearch" placeholder="Buscar tarefa..."><select class="field" id="taskFilter" style="max-width:190px"><option value="all">Todas as tarefas</option><option value="pending">Pendentes</option><option value="done">Concluídas</option></select></div>
+   <div class="card"><div class="list" id="taskList"></div></div>
+  </section>
+
+  <section class="page" id="page-projects">
+   <div class="page-head"><div><div class="eyebrow">CRIAÇÃO E ACOMPANHAMENTO</div><h1>Meus projetos</h1><p>Organize ideias, etapas e progresso.</p></div><button class="btn red" data-open="project">＋ Novo projeto</button></div>
+   <div class="toolbar"><input class="field" id="projectSearch" placeholder="Buscar projeto..."></div>
+   <div class="grid three-col" id="projectList"></div>
+  </section>
+
+  <section class="page" id="page-study">
+   <div class="page-head"><div><div class="eyebrow">APRENDIZADO CONTÍNUO</div><h1>Central de estudos</h1><p>Registre o que está aprendendo e acompanhe suas sessões.</p></div><button class="btn red" data-open="study">＋ Registrar estudo</button></div>
+   <div class="grid stats" style="grid-template-columns:repeat(2,minmax(0,1fr))"><div class="card"><div class="stat-top">Sessões registradas <span class="stat-icon">▤</span></div><div class="stat-number" id="studyTotal">0</div><div class="stat-foot">Seu histórico de aprendizagem</div></div><div class="card"><div class="stat-top">Tempo estudado <span class="stat-icon">◷</span></div><div class="stat-number" id="studyMinutes">0 min</div><div class="stat-foot">Total de minutos registrados</div></div></div>
+   <div class="card"><div class="card-title"><h3>Histórico de estudos</h3><span class="small-text">Mais recentes primeiro</span></div><div class="list" id="studyList"></div></div>
+  </section>
+
+  <section class="page" id="page-assistant">
+   <div class="page-head"><div><div class="eyebrow">INTELIGÊNCIA ARTIFICIAL</div><h1>Pulse AI</h1><p>O espaço reservado para seu assistente inteligente.</p></div><span class="tag red">Integração pendente</span></div>
+   <div class="chat-shell">
+    <div class="card chat-foot"><div class="chat-status"><i class="status-dot" id="aiStatusDot"></i><span id="aiStatusText">Verificando backend seguro…</span></div><button class="btn ghost small" id="clearChatBtn" type="button">Limpar conversa</button></div>
+    <div class="chat-log" id="chatLog" aria-live="polite"><div class="chat-msg assistant">Olá! Sou o Pulse AI. Quando o backend e o provedor estiverem configurados, poderei responder por aqui. Suas tarefas, projetos e estudos continuam salvos separadamente neste navegador.</div></div>
+    <div class="card"><form id="chatForm" class="chat-compose"><textarea class="field" id="chatInput" rows="2" maxlength="4000" placeholder="Escreva sua mensagem…" aria-label="Mensagem para o Pulse AI"></textarea><button class="btn red" id="sendChatBtn" type="submit">Enviar</button></form><div class="chat-foot" style="margin-top:9px"><span class="small-text">A chave de API fica somente no servidor.</span><span class="small-text" id="chatHint">Conexão ainda não verificada.</span></div></div>
+   </div>
+  </section>
+
+  <section class="page" id="page-settings">
+   <div class="page-head"><div><div class="eyebrow">PERSONALIZAÇÃO</div><h1>Configurações</h1><p>Gerencie seu espaço e seus dados.</p></div></div>
+   <div class="grid settings-grid">
+    <div class="card"><div class="card-title"><h3>Aparência</h3><span class="tag">PULSE THEME</span></div>
+     <div class="setting-row"><div><strong>Paleta oficial</strong><small>Cinza, vermelho escuro e azul</small></div><div class="swatches"><i class="swatch" style="background:#34383f"></i><i class="swatch" style="background:#741f2b"></i><i class="swatch" style="background:#24558a"></i></div></div>
+     <div class="setting-row"><div><strong>Interface</strong><small>Tema escuro</small></div><span class="tag">Ativo</span></div>
+    </div>
+    <div class="card"><div class="card-title"><h3>Dados e armazenamento</h3><span class="tag">LOCAL</span></div>
+     <div class="setting-row"><div><strong>Exportar dados</strong><small>Baixe uma cópia dos seus registros</small></div><button class="btn ghost small" id="exportBtn">Exportar</button></div>
+     <div class="setting-row"><div><strong>Importar dados</strong><small>Restaurar um arquivo JSON do Pulse</small></div><button class="btn ghost small" id="importBtn">Importar</button><input type="file" id="importFile" accept="application/json" hidden></div>
+     <div class="setting-row"><div><strong>Apagar todos os dados</strong><small>Essa ação não pode ser desfeita</small></div><button class="btn red small" id="clearBtn">Apagar</button></div>
+    </div>
+    <div class="card"><div class="card-title"><h3>Sobre o Pulse</h3></div><p class="muted small-text">PROJECT PULSE — GOD EDITION 1.0</p><p class="muted small-text">Um workspace pessoal para tarefas, projetos e estudos. Esta versão funciona localmente neste navegador.</p></div>
+    <div class="card"><div class="card-title"><h3>Integração de IA</h3><span class="tag red">Não conectada</span></div><p class="muted small-text">A conexão real será feita por um backend seguro. A chave de API não deve ser armazenada neste arquivo HTML.</p></div>
+   </div>
+  </section>
+ </div>
+</main>
+</div>
+<nav class="mobile-nav" id="mobileNav">
+ <button class="active" data-page="dashboard"><span>◫</span>Início</button><button data-page="tasks"><span>✓</span>Tarefas</button><button data-page="projects"><span>▦</span>Projetos</button><button data-page="study"><span>▤</span>Estudos</button><button data-page="settings"><span>⚙</span>Ajustes</button>
+</nav>
+</div>
+
+<div class="modal-backdrop" id="modalBackdrop"><div class="modal"><h2 id="modalTitle">Novo item</h2><form id="itemForm" class="form-grid"></form><div class="modal-actions"><button class="btn ghost" id="cancelModal" type="button">Cancelar</button><button class="btn red" id="saveModal" type="button">Salvar</button></div></div></div>
+<div class="toast" id="toast"></div>
+<script>
+const KEY='pulse_god_edition_v1';
+const CHAT_KEY='pulse_god_edition_chat_v1';
+const initial={tasks:[],projects:[],studies:[]};
+let chatHistory=loadChat();
+function loadChat(){try{const x=JSON.parse(localStorage.getItem(CHAT_KEY)||'[]');return Array.isArray(x)?x.slice(-30):[]}catch{return []}}
+function saveChat(){localStorage.setItem(CHAT_KEY,JSON.stringify(chatHistory.slice(-30)))}
+let data=loadData(),modalType=null;
+function loadData(){try{return {...initial,...JSON.parse(localStorage.getItem(KEY)||'{}')}}catch{return structuredClone(initial)}}
+function save(){localStorage.setItem(KEY,JSON.stringify(data));render()}
+function esc(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200)}
+const todayISO=()=>new Date().toISOString().slice(0,10);
+document.getElementById('today').textContent=new Intl.DateTimeFormat('pt-BR',{weekday:'short',day:'2-digit',month:'short'}).format(new Date());
+function go(page){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+page));document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===page));const names={dashboard:'Visão geral',tasks:'Tarefas',projects:'Projetos',study:'Estudos',assistant:'Pulse AI',settings:'Configurações'};document.getElementById('topTitle').textContent=names[page]||page;document.getElementById('sidebar').classList.remove('open');}
+document.addEventListener('click',e=>{const p=e.target.closest('[data-page]');if(p){go(p.dataset.page);return}const o=e.target.closest('[data-open]');if(o)openModal(o.dataset.open)});
+document.getElementById('menuBtn').onclick=()=>document.getElementById('sidebar').classList.toggle('open');
+function empty(msg){return `<div class="empty">${msg}</div>`}
+function render(){
+ const pending=data.tasks.filter(t=>!t.done),done=data.tasks.filter(t=>t.done);
+ document.getElementById('statPending').textContent=pending.length;document.getElementById('statDone').textContent=done.length;document.getElementById('statProjects').textContent=data.projects.length;document.getElementById('statStudy').textContent=data.studies.length;
+ const todays=data.tasks.filter(t=>t.date===todayISO()),tdone=todays.filter(t=>t.done).length,pct=todays.length?Math.round(tdone/todays.length*100):0;
+ document.getElementById('focusCount').textContent=`${tdone}/${todays.length}`;document.getElementById('todayProgress').textContent=pct+'% concluído';document.getElementById('focusBar').style.width=pct+'%';
+ document.getElementById('todayTasks').innerHTML=todays.length?todays.map(taskRow).join(''):empty('Nenhuma tarefa programada para hoje. Adicione uma nova tarefa para começar.');
+ document.getElementById('taskList').innerHTML=filteredTasks().length?filteredTasks().map(taskRow).join(''):empty('Nenhuma tarefa encontrada.');
+ const ps=data.projects.filter(p=>p.name.toLowerCase().includes((document.getElementById('projectSearch')?.value||'').toLowerCase()));
+ document.getElementById('projectList').innerHTML=ps.length?ps.map(projectCard).join(''):empty('Nenhum projeto ainda. Crie seu primeiro projeto.');
+ document.getElementById('dashboardProjects').innerHTML=data.projects.length?data.projects.slice(0,3).map(projectCard).join(''):empty('Seus projetos aparecerão aqui.');
+ document.getElementById('studyTotal').textContent=data.studies.length;const mins=data.studies.reduce((a,s)=>a+(+s.minutes||0),0);document.getElementById('studyMinutes').textContent=mins+' min';
+ document.getElementById('studyList').innerHTML=data.studies.length?data.studies.slice().reverse().map(s=>`<div class="list-row"><div class="stat-icon">▤</div><div class="grow"><strong>${esc(s.subject)}</strong><small>${esc(s.note||'Sessão de estudo')} · ${esc(s.date)}</small></div><span class="tag">${+s.minutes||0} min</span><button class="icon-btn" data-delete-study="${s.id}" aria-label="Excluir">×</button></div>`).join(''):empty('Nenhuma sessão registrada ainda.');
+}
+function taskRow(t){return `<div class="list-row"><input class="check" type="checkbox" ${t.done?'checked':''} data-toggle-task="${t.id}" aria-label="Concluir tarefa"><div class="grow"><strong style="${t.done?'text-decoration:line-through;opacity:.55':''}">${esc(t.title)}</strong><small>${esc(t.date||'Sem data')} · ${esc(t.priority||'Normal')}</small></div><span class="tag ${t.priority==='Alta'?'red':''}">${t.done?'Concluída':'Pendente'}</span><button class="icon-btn" data-delete-task="${t.id}" aria-label="Excluir">×</button></div>`}
+function projectCard(p){const pct=Math.max(0,Math.min(100,+p.progress||0));return `<div class="card project-card"><div class="card-title"><span class="tag">${esc(p.status||'Em andamento')}</span><button class="icon-btn" data-delete-project="${p.id}" aria-label="Excluir projeto">×</button></div><h3>${esc(p.name)}</h3><p>${esc(p.description||'Sem descrição adicionada.')}</p><div class="project-meta"><span>Progresso</span><b>${pct}%</b></div><div class="progress"><span style="width:${pct}%"></span></div><input aria-label="Progresso do projeto" type="range" min="0" max="100" value="${pct}" data-progress="${p.id}" style="width:100%;accent-color:var(--blue)"></div>`}
+function filteredTasks(){const q=(document.getElementById('taskSearch')?.value||'').toLowerCase(),f=document.getElementById('taskFilter')?.value||'all';return data.tasks.filter(t=>t.title.toLowerCase().includes(q)&&(f==='all'||(f==='done'?t.done:!t.done))).slice().reverse()}
+function openModal(type){modalType=type;const form=document.getElementById('itemForm');const config={
+ task:{title:'Adicionar tarefa',fields:[['title','Nome da tarefa','text','Ex.: estudar JavaScript'],['date','Data','date',todayISO()],['priority','Prioridade','select','Normal']]},
+ project:{title:'Novo projeto',fields:[['name','Nome do projeto','text','Ex.: Meu aplicativo'],['description','Descrição','textarea','Qual é o objetivo?'],['progress','Progresso (%)','number','0']]},
+ study:{title:'Registrar estudo',fields:[['subject','Matéria ou assunto','text','Ex.: Química'],['minutes','Duração em minutos','number','30'],['date','Data','date',todayISO()],['note','O que você estudou?','textarea','Anotações (opcional)']]}
+}[type];
+ document.getElementById('modalTitle').textContent=config.title;
+ form.innerHTML=config.fields.map(([name,label,kind,placeholder])=>`<label>${label}${kind==='select'?`<select class="field" name="${name}"><option>Normal</option><option>Alta</option><option>Baixa</option></select>`:kind==='textarea'?`<textarea class="field" name="${name}" rows="3" placeholder="${esc(placeholder)}"></textarea>`:`<input class="field" name="${name}" type="${kind}" ${kind==='number'?'min="0" max="100"':''} placeholder="${esc(placeholder)}" ${kind==='date'||kind==='number'?'value="'+esc(placeholder)+'"':''} required>`}</label>`).join('');
+ document.getElementById('modalBackdrop').classList.add('show');
+}
+function closeModal(){document.getElementById('modalBackdrop').classList.remove('show')}
+document.getElementById('cancelModal').onclick=closeModal;document.getElementById('modalBackdrop').addEventListener('click',e=>{if(e.target.id==='modalBackdrop')closeModal()});
+document.getElementById('saveModal').onclick=()=>{
+ const form=document.getElementById('itemForm');if(!form.reportValidity())return;const v=Object.fromEntries(new FormData(form).entries());const id=crypto.randomUUID?crypto.randomUUID():String(Date.now());
+ if(modalType==='task')data.tasks.push({id,title:v.title.trim(),date:v.date,priority:v.priority,done:false});
+ if(modalType==='project')data.projects.push({id,name:v.name.trim(),description:v.description.trim(),progress:Math.max(0,Math.min(100,+v.progress||0)),status:'Em andamento'});
+ if(modalType==='study')data.studies.push({id,subject:v.subject.trim(),minutes:Math.max(0,+v.minutes||0),date:v.date,note:v.note.trim()});
+ closeModal();save();toast('Registro salvo com sucesso.');
+};
+document.addEventListener('change',e=>{const t=e.target;if(t.matches('[data-toggle-task]')){const x=data.tasks.find(a=>a.id===t.dataset.toggleTask);if(x)x.done=t.checked;save()}if(t.matches('[data-progress]')){const x=data.projects.find(a=>a.id===t.dataset.progress);if(x){x.progress=+t.value;x.status=x.progress===100?'Concluído':'Em andamento';save()}}});
+document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;for(const [attr,key] of [['data-delete-task','tasks'],['data-delete-project','projects'],['data-delete-study','studies']])if(b.hasAttribute(attr)){if(confirm('Excluir este registro?')){data[key]=data[key].filter(x=>x.id!==b.getAttribute(attr));save();toast('Registro excluído.')}return}});
+document.getElementById('taskSearch').addEventListener('input',()=>document.getElementById('taskList').innerHTML=filteredTasks().map(taskRow).join('')||empty('Nenhuma tarefa encontrada.'));
+document.getElementById('taskFilter').addEventListener('change',()=>document.getElementById('taskList').innerHTML=filteredTasks().map(taskRow).join('')||empty('Nenhuma tarefa encontrada.'));
+document.getElementById('projectSearch').addEventListener('input',render);
+document.getElementById('exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='pulse-backup.json';a.click();URL.revokeObjectURL(a.href);toast('Backup exportado.')};
+document.getElementById('importBtn').onclick=()=>document.getElementById('importFile').click();
+document.getElementById('importFile').onchange=async e=>{try{const obj=JSON.parse(await e.target.files[0].text());if(!obj||!Array.isArray(obj.tasks)||!Array.isArray(obj.projects)||!Array.isArray(obj.studies))throw Error();data=obj;save();toast('Backup importado.')}catch{toast('Arquivo inválido.')}e.target.value=''};
+document.getElementById('clearBtn').onclick=()=>{if(confirm('Tem certeza que deseja apagar todas as tarefas, projetos e estudos?')){data=structuredClone(initial);save();toast('Dados apagados.')}};
+render();
+
+// Pulse AI: the browser talks only to this app's own backend. Secrets never belong here.
+const chatLog=document.getElementById('chatLog');
+function renderChat(){chatLog.innerHTML='';if(!chatHistory.length){const welcome=document.createElement('div');welcome.className='chat-msg assistant';welcome.textContent='Olá! Sou o Pulse AI. Configure o backend e o provedor de IA para começar uma conversa real.';chatLog.append(welcome);return}chatHistory.forEach(m=>{const el=document.createElement('div');el.className='chat-msg '+(m.role==='user'?'user':'assistant');el.textContent=m.content;chatLog.append(el)});chatLog.scrollTop=chatLog.scrollHeight}
+async function checkAI(){const dot=document.getElementById('aiStatusDot'),label=document.getElementById('aiStatusText'),hint=document.getElementById('chatHint');try{const r=await fetch('/api/health',{headers:{'Accept':'application/json'}});const j=await r.json();if(!r.ok)throw Error(j.error||'Backend indisponível');dot.classList.toggle('online',!!j.configured);label.textContent=j.configured?'Backend ativo · IA configurada':'Backend ativo · falta configurar o provedor';hint.textContent=j.configured?'Pronto para conversar.':'Configure AI_API_KEY e AI_MODEL no servidor.'}catch{dot.classList.remove('online');label.textContent='Backend não encontrado';hint.textContent='Inicie o servidor local ou publique frontend e backend juntos.'}}
+document.getElementById('chatForm').addEventListener('submit',async e=>{e.preventDefault();const input=document.getElementById('chatInput'),btn=document.getElementById('sendChatBtn'),message=input.value.trim();if(!message)return;if(message.length>4000){toast('Mensagem muito longa.');return}chatHistory.push({role:'user',content:message});saveChat();renderChat();input.value='';btn.disabled=true;btn.textContent='…';try{const response=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({messages:chatHistory.slice(-20)})});const result=await response.json();if(!response.ok)throw Error(result.error||'Falha ao falar com o servidor.');if(typeof result.reply!=='string'||!result.reply.trim())throw Error('O servidor retornou uma resposta vazia.');chatHistory.push({role:'assistant',content:result.reply.trim()});saveChat();renderChat()}catch(err){chatHistory.push({role:'assistant',content:'Não consegui responder: '+err.message+'\nVerifique se o backend está ativo e se o provedor foi configurado.'});saveChat();renderChat()}finally{btn.disabled=false;btn.textContent='Enviar';input.focus()}});
+document.getElementById('clearChatBtn').onclick=()=>{if(confirm('Limpar o histórico desta conversa?')){chatHistory=[];saveChat();renderChat();toast('Conversa limpa.')}};
+renderChat();checkAI();
+</script>
+</body>
+</html>
