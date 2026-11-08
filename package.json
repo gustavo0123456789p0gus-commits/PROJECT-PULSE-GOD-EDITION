@@ -2,16 +2,19 @@
   "name": "project-pulse-god-edition",
   "version": "2.0.0",
   "private": true,
-  "description": "PROJECT PULSE — GOD EDITION: Capri AI chat platform",
   "type": "module",
+  "description": "CAPRI AI — estrutura profissional de frontend + backend",
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js",
     "test": "node --test"
   },
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "dependencies": {
     "better-sqlite3": "^11.8.1",
+    "dotenv": "^16.4.5",
     "express": "^4.21.2",
     "helmet": "^8.0.0"
   }

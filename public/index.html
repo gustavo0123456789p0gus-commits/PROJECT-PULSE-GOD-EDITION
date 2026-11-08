@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#080d14" />
+    <title>CAPRI AI</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">C</div>
+          <div>
+            <strong>CAPRI AI</strong>
+            <small>God Edition</small>
+          </div>
+        </div>
+
+        <button class="nav-button primary" id="newConversationBtn">+ Nova conversa</button>
+        <button class="nav-button" id="settingsBtn">⚙ Configurações</button>
+        <button class="nav-button" id="voiceBtn">♫ Voz</button>
+        <button class="nav-button" id="exportBtn">⇩ Exportar</button>
+
+        <div class="section-label">Sistema</div>
+        <button class="nav-button" id="adminBtn">⌘ Área ADM</button>
+        <button class="nav-button" id="clearBtn">⌫ Limpar</button>
+
+        <div class="sidebar-footer">
+          <div class="status-card">
+            <span class="status-dot" id="statusDot"></span>
+            <div>
+              <div>CAPRI SYSTEM</div>
+              <small id="connectionStatus">Conectando...</small>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-panel">
+        <header class="topbar">
+          <div class="topbar-left">
+            <button class="icon-button mobile-only" id="mobileMenuBtn">☰</button>
+            <div class="title">CAPRI <span>/ AI</span></div>
+          </div>
+          <div class="topbar-actions">
+            <button class="icon-button" id="themeBtn">◐</button>
+            <button class="icon-button" id="profileBtn">⚡</button>
+          </div>
+        </header>
+
+        <div class="workspace">
+          <section class="chat-panel">
+            <div class="messages" id="messages"></div>
+
+            <div class="composer-wrap">
+              <div class="composer">
+                <button class="icon-button" id="micBtn">🎙</button>
+                <textarea id="promptInput" rows="1" placeholder="Conversar com a Capri..."></textarea>
+                <button class="send-button" id="sendBtn">➤</button>
+              </div>
+              <div class="composer-hint">CAPRI AI • Backend seguro • Groq via servidor</div>
+            </div>
+          </section>
+
+          <aside class="side-panel">
+            <div class="panel-title">HOLOGRAPHIC INTERFACE</div>
+            <div class="avatar-stage" id="avatarStage">
+              <div class="avatar-hud">
+                <span class="hud-top">CAPRI // LINK</span>
+                <span class="hud-cross">＋</span>
+                <span class="hud-bottom"><i></i><b id="moodLabel">AGUARDANDO</b><small>NEURAL DISPLAY</small></span>
+              </div>
+            </div>
+            <div class="character-caption">
+              <strong>CAPRI</strong>
+              <p>Assistente virtual com arquitetura pronta para IA, memória e automação.</p>
+            </div>
+            <div class="character-tools">
+              <button class="mini-button" id="memoryBtn">✦ Memória</button>
+              <button class="mini-button" id="moodBtn">◈ Personalidade</button>
+            </div>
+          </aside>
+        </div>
+      </main>
+    </div>
+
+    <div class="modal hidden" id="authModal">
+      <div class="modal-card auth-card">
+        <div class="modal-header">
+          <h2>Entrar no CAPRI</h2>
+          <button class="close-button" data-close="authModal">×</button>
+        </div>
+        <div class="auth-toggle">
+          <button class="tab-button active" data-mode="login">Entrar</button>
+          <button class="tab-button" data-mode="register">Registrar</button>
+        </div>
+        <form id="authForm">
+          <label>
+            <span>E-mail</span>
+            <input type="email" id="authEmail" required />
+          </label>
+          <label>
+            <span>Senha</span>
+            <input type="password" id="authPassword" minlength="12" required />
+          </label>
+          <button class="submit-button" type="submit">Continuar</button>
+          <p id="authMessage" class="form-message"></p>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal hidden" id="settingsModal">
+      <div class="modal-card large-card">
+        <div class="modal-header">
+          <h2>Configurações do sistema</h2>
+          <button class="close-button" data-close="settingsModal">×</button>
+        </div>
+
+        <div class="settings-grid">
+          <div>
+            <label class="field">
+              <span>Personalidade</span>
+              <textarea id="personalityInput" rows="4"></textarea>
+            </label>
+            <label class="field checkbox-row">
+              <input type="checkbox" id="voiceEnabledInput" />
+              <span>Ativar voz do assistente</span>
+            </label>
+          </div>
+          <div>
+            <label class="field">
+              <span>Tema</span>
+              <select id="themeSelect">
+                <option value="midnight">Midnight</option>
+                <option value="graphite">Graphite</option>
+                <option value="neon">Neon</option>
+              </select>
+            </label>
+            <div class="tiny-panel">
+              <h3>Conexão</h3>
+              <p id="connectionInfo">Serviço de IA aguardando configuração.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button class="secondary-button" type="button" data-close="settingsModal">Cancelar</button>
+          <button class="submit-button" id="saveSettingsBtn" type="button">Salvar</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
